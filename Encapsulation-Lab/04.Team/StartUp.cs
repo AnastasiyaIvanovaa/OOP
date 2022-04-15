@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
+
+namespace PersonsInfo
+{
+    public class StartUp
+    {
+        static void Main(string[] args)
+        {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-GB");
+
+            var lines = int.Parse(Console.ReadLine());
+
+            var persons = new List<Person>();
+
+            for (int i = 0; i < lines; i++)
+
+            {
+
+                string[] cmdArgs = Console.ReadLine().Split();
+
+                Person person = new Person(cmdArgs[0],
+
+                cmdArgs[1],
+
+                int.Parse(cmdArgs[2]));
+
+                persons.Add(person);
+
+            }
+
+            var parcentage = decimal.Parse(Console.ReadLine());
+
+            persons.ForEach(p => p.IncreaseSalary(parcentage));
+
+            persons.ForEach(p => Console.WriteLine(p.ToString()));
+
+            Team team = new Team("dreamteam");
+            persons.ForEach(p => team.AddPlayer(p));
+            Console.WriteLine(team.FirstTeam.Count);
+            Console.WriteLine(team.ReserveTeam.Count);
+        }
+    }
+}
